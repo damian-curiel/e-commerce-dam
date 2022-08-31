@@ -32,7 +32,7 @@ CREATE TABLE USUARIO(
 );
 
 INSERT INTO USUARIO (nomusu,apeusu,emausu,pasusu,estado)
-VALUES ('Usuario','Demo','correo@example.com','123456',1);
+VALUES ('Damian','Curiel','damian@conekta.com','conekta',1);
 
 create table PEDIDO(
 	codped int not null AUTO_INCREMENT,

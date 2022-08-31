@@ -22,7 +22,7 @@
 				</div>
 				<div class="part2">
 					<h2 id="idtitle">NOMBRE PRINCIPAL</h2>
-					<h1 id="idprice">S/. 35.<span>99</span></h1>
+					<h1 id="idprice">S 35.<span>99</span></h1>
 					<h3 id="iddescription">Descripcion del producto</h3>
 					<button onclick="iniciar_compra()">Comprar</button>
 				</div>
@@ -76,7 +76,7 @@
 			//10.99
 			let svalor=valor.toString();
 			let array=svalor.split(".");
-			return "S/. "+array[0]+".<span>"+array[1]+"</span>";
+			return "$ "+array[0]+".<span>"+array[1]+"</span>";
 		}
 		function iniciar_compra(){
 			$.ajax({

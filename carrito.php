@@ -22,18 +22,47 @@
 			<h3>Mi carrito</h3>
 			<div class="body-pedidos" id="space-list">
 			</div>
-			<input class="ipt-procom" type="text" id="dirusu" placeholder="Dirección">
+	<!--	<input class="ipt-procom" type="text" id="dirusu" placeholder="Dirección">
 			<br>
 			<input class="ipt-procom" type="text" id="telusu" placeholder="Celular">
+-->		
+			<br>
+			<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Checkout</title>
+    <script type="text/javascript" src="https://pay.conekta.com/v1.0/js/conekta-checkout.min.js"></script>
+</head>
+<body>
+   <div id="conektaIframeContainer" style="height: 700px;"></div>
+    <script type="text/javascript">
+    window.ConektaCheckoutComponents.Integration({
+        targetIFrame: "#conektaIframeContainer",
+        checkoutRequestId: "42a4c95e-0db2-4ae8-9bb3-ea681acc8281", // checkout request id
+        publicKey: "key_D8CpFzCk4x7Ho5Cr9xosgcA",
+        options: {},
+        styles: {},
+        onFinalizePayment: function(event){
+            console.log(event);
+        }
+    })
+    </script>
+</body>
+</html>
 			<br>
 			<h4>Tipos de pago</h4>
 			<div class="metodo-pago">
 				<input type="radio" name="tipopago" value="1" id="tipo1">
-				<label for="tipo1">Pago por transferencia</label>
+				<label for="tipo1">Pago por transferencia SPEI</label>
 			</div>
 			<div class="metodo-pago">
 				<input type="radio" name="tipopago" value="2" id="tipo2">
 				<label for="tipo2">Pago con tarjeta de crédito/débito</label>
+			</div>
+			<div class="metodo-pago">
+				<input type="radio" name="tipopago" value="3" id="tipo3">
+				<label for="tipo3">Pago en efectivo con OXXO PAY</label>
 			</div>
 			<button onclick="procesar_compra()" style="margin-top: 5px;">Procesar compra</button>
 		</div>
@@ -106,15 +135,18 @@
 			});
 		}
 		function procesar_compra(){
-			let dirusu=document.getElementById("dirusu").value;
-			let telusu=$("#telusu").val();
+			let dirusu="Avenida Siempre Viva 123";
+			let telusu=5512345678;
 			let tipopago=1;
 			if (document.getElementById("tipo2").checked) {
 				tipopago=2;
 			}
-			if (dirusu=="" || telusu=="") {
-				alert("Complete los campos");
-			}else{
+			if (document.getElementById("tipo3").checked) {
+				tipopago=3;
+			}
+		//	if (dirusu=="" || telusu=="") {
+		//		alert("Complete los campos");
+		//	}else{
 				if (!document.getElementById("tipo1").checked &&
 					!document.getElementById("tipo2").checked) {
 					alert("Seleccione un método de pago!");
@@ -145,7 +177,7 @@
 						});
 					}
 				}
-			}
+			//}
 		}
 		function culqi() {
 			if (Culqi.token) { 

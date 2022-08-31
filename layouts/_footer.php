@@ -7,11 +7,12 @@
 			</div>
 			<div class="part">
 				<h4 class="mb10">Redes sociales</h4>
-				<a href="" target="_blank">Facebook: Mi tienda</a>
+				<a href="" target="_blank">Linkedin:  Conekta</a>
 				<br>
-				<a href="" target="_blank">Whatsapp: 999 888 777</a>
+				<a href="" target="_blank">Whatsapp</a>
 			</div>
 		</div>
-		<center><h5>Mi tienda - Derechos reservador 2021</h5></center>
+		<center><h5>Conekta Demo - Derechos reservados Damián Curiel 2022</h5></center>
 	</div>
 </footer>
+

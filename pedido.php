@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Mi sistema E-Commerce</title>
+	<title>Checkout Conekta</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
@@ -23,11 +23,10 @@
 			<div class="body-pedidos" id="space-list">
 			</div>
 			<h3>Datos de pago</h3>
-			<div class="p-line"><div>MONTO TOTAL:</div>S/.&nbsp;<span id="montototal"></span></div>
-			<div class="p-line"><div>Banco:</div>BCP</div>
-			<div class="p-line"><div>N° de Cuenta:</div>191-45678945-006</div>
-			<div class="p-line"><div>Representante:</div>Encargado de ventas</div>
-			<p><b>NOTA:</b> Para confirmar la compra debe realizar el deposito por le monto total, y enviar el comprobante al siguiente correo example@example.com o al número de whatsapp 999 666 333</p>
+			<div class="p-line"><div>MONTO TOTAL:</div>$&nbsp;<span id="montototal"></span></div>
+			<div class="p-line"><div>Banco:</div>STP</div>
+			<div class="p-line"><div>N° de Cuenta:</div>123456789012345678</div>
+			<p><b>NOTA:</b> No olvides guardar tu comprobante de transferencia exitosa.</p>
 		</div>
 	</div>
 	<?php include("layouts/_footer.php"); ?>

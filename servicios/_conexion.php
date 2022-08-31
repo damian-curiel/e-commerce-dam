@@ -7,3 +7,12 @@
 	'contraseña del usuario de la base de datos',
 	'nombre del esquema de base de datos');
 	*/
+
+	//Validación de conexión a BD
+	
+	/*if ($con==true) {
+		echo "Conectado";
+	}else{
+			echo "NO conecto";
+		}
+	*/
