@@ -3,6 +3,9 @@
 	if (!isset($_SESSION['codusu'])) {
 		header('location: index.php');
 	}
+	require_once("conekta-php-lib\conekta-php\lib\Conekta.php");
+	\Conekta\Conekta::setApiKey("key_D8CpFzCk4x7Ho5Cr9xosgcA");
+	\Conekta\Conekta::setApiVersion("2.0.0");
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,55 +22,37 @@
 	<?php include("layouts/_main-header.php"); ?>
 	<div class="main-content">
 		<div class="content-page">
-			<h3>Mi carrito</h3>
+			<h2>Mi carrito de compras</h2>
 			<div class="body-pedidos" id="space-list">
 			</div>
-	<!--	<input class="ipt-procom" type="text" id="dirusu" placeholder="Dirección">
 			<br>
-			<input class="ipt-procom" type="text" id="telusu" placeholder="Celular">
--->		
-			<br>
-			<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Checkout</title>
-    <script type="text/javascript" src="https://pay.conekta.com/v1.0/js/conekta-checkout.min.js"></script>
-</head>
-<body>
-   <div id="conektaIframeContainer" style="height: 700px;"></div>
-    <script type="text/javascript">
-    window.ConektaCheckoutComponents.Integration({
-        targetIFrame: "#conektaIframeContainer",
-        checkoutRequestId: "42a4c95e-0db2-4ae8-9bb3-ea681acc8281", // checkout request id
-        publicKey: "key_D8CpFzCk4x7Ho5Cr9xosgcA",
-        options: {},
-        styles: {},
-        onFinalizePayment: function(event){
-            console.log(event);
-        }
-    })
-    </script>
-</body>
-</html>
-			<br>
-			<h4>Tipos de pago</h4>
+			<h3>Seleccione un método de pago</h3>
 			<div class="metodo-pago">
 				<input type="radio" name="tipopago" value="1" id="tipo1">
-				<label for="tipo1">Pago por transferencia SPEI</label>
+				<img src="https://assets.conekta.com/cpanel/statics/assets/brands/logos/spei-24px.svg">
+				<label for="tipo1">&nbsp &nbsp	Pago por transferencia SPEI</label>
 			</div>
+			<br>
 			<div class="metodo-pago">
 				<input type="radio" name="tipopago" value="2" id="tipo2">
-				<label for="tipo2">Pago con tarjeta de crédito/débito</label>
+				<img src="https://assets.conekta.com/cpanel/statics/assets/brands/logos/master-card-24px.svg">
+				<label for="tipo2">&nbsp &nbsp Pago con tarjeta de crédito/débito</label>
 			</div>
+			<br>
 			<div class="metodo-pago">
 				<input type="radio" name="tipopago" value="3" id="tipo3">
-				<label for="tipo3">Pago en efectivo con OXXO PAY</label>
+				<img src="https://assets.conekta.com/cpanel/statics/assets/brands/logos/oxxo-pay-24px.svg">
+				<label for="tipo3">&nbsp &nbsp Pago en efectivo con OXXO PAY</label>
 			</div>
+			<br><br>
 			<button onclick="procesar_compra()" style="margin-top: 5px;">Procesar compra</button>
 		</div>
 	</div>
-	<?php include("layouts/_footer.php"); ?>
+	<?php include("layouts/_footer.php");
+		require_once("conekta-php-lib\conekta-php\lib\Conekta.php");
+		\Conekta\Conekta::setApiKey("key_D8CpFzCk4x7Ho5Cr9xosgcA");
+		\Conekta\Conekta::setApiVersion("2.0.0");
+	?>
 	<script type="text/javascript" src="js/main-scripts.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -78,7 +63,7 @@
 				success:function(data){
 					console.log(data);
 					let html='';
-					let sumaMonto=0;
+				//	let sumaMonto=0;
 					for (var i = 0; i < data.datos.length; i++) {
 						html+=
 						'<div class="item-pedido">'+
@@ -95,18 +80,13 @@
 								'<button class="btn-delete-cart" onclick="delete_product('+data.datos[i].codped+')">Eliminar</button>'+
 							'</div>'+
 						'</div>';
-						sumaMonto+=parseInt(data.datos[i].prepro)+1;
+						//sumaMonto+=parseInt(data.datos[i].prepro)+1;
 					}
 					if (data.datos.length==0) {
 						alert("No hay productos en carrito");
 						window.history.back();
 					}
-				    Culqi.settings({
-				        title: 'Mi tienda',
-				        currency: 'PEN',
-				        description: 'Productos escolares',
-				        amount: sumaMonto
-				    });
+				 
 					document.getElementById("space-list").innerHTML=html;
 				},
 				error:function(err){
@@ -134,6 +114,7 @@
 				}
 			});
 		}
+
 		function procesar_compra(){
 			let dirusu="Avenida Siempre Viva 123";
 			let telusu=5512345678;
@@ -148,70 +129,104 @@
 		//		alert("Complete los campos");
 		//	}else{
 				if (!document.getElementById("tipo1").checked &&
-					!document.getElementById("tipo2").checked) {
+					!document.getElementById("tipo2").checked&&
+					!document.getElementById("tipo3").checked) {
 					alert("Seleccione un método de pago!");
 				}else{
-					if (tipopago==2) {
-						Culqi.open();
-					}else{
-						$.ajax({
-							url:'servicios/pedido/confirm.php',
-							type:'POST',
-							data:{
-								dirusu:dirusu,
-								telusu:telusu,
-								tipopago:tipopago,
-								token:''
-							},
-							success:function(data){
-								console.log(data);
-								if (data.state) {
-									window.location.href="pedido.php";
-								}else{
-									alert(data.detail);
+					if (tipopago==3) {
+
+							var url = "https://api.conekta.io/orders";
+
+							var xhr = new XMLHttpRequest();
+							xhr.open("POST", url);
+
+							xhr.setRequestHeader("accept", "application/vnd.conekta-v2.0.0+json");
+							xhr.setRequestHeader("content-type", "application/json");
+							xhr.setRequestHeader("Authorization", "Bearer key_7L2SkBYyugLtsRsydECwkQ");
+
+							xhr.onreadystatechange = function () {
+							if (xhr.readyState === 4) {
+								console.log(xhr.status);
+								console.log(xhr.responseText);
+							}};
+
+							var data = `{
+								"line_items": [{
+								"name": "Ecolapices Faber Castell",
+								"unit_price": 1199,
+								"quantity": 1
+								}],
+								"shipping_lines": [{
+								"amount": 3500,
+								"carrier": "UPS"
+								}],
+								"currency": "MXN",
+								"customer_info": {
+								"name": "Damián Curiel",
+								"email": "Damian@conekta.com",
+								"phone": "+5218181818181"
+								},
+								"shipping_contact":{
+								"address": {
+								"street1": "Calle 123, int 2",
+								"postal_code": "06100",
+								"country": "MX"
 								}
-							},
-							error:function(err){
-								console.error(err);
+								},
+								"charges":[{
+								"payment_method": {
+									"type": "oxxo_cash",
+									"expires_at": 1690872197
+								}
+								}]
+							}`;
+
+							xhr.send(data);
+
+							console.log("ID: " + order.id);
+							console.log("Payment Method: " + order.charges[0].payment_method.service_name);
+							console.log("Reference: " + order.charges[0].payment_method.reference);
+							console.log("$" + (order.amount/100) + order.currency);
+							console.log("Order");
+							console.log(order.line_items[0].quantity + " - "
+										+ order.line_items[0].name + " - "
+										+ (order.line_items.unit_price/100));
+											
 							}
-						});
-					}
-				}
-			//}
-		}
-		function culqi() {
-			if (Culqi.token) { 
-		      	var token = Culqi.token.id;
-		      	$.ajax({
-					url:'servicios/pedido/confirm.php',
-					type:'POST',
-					data:{
-						dirusu:document.getElementById("dirusu").value,
-						telusu:$("#telusu").val(),
-						tipopago:2,
-						token:token
-					},
-					success:function(data){
-						console.log(data);
-						if (data.state) {
-							window.location.href="pedido.php";
+
+
+
+						//alert("Seleccione un método de pago2!");
+					else{						
+						if (tipopago==2) {
+							window.location.href="web_checkout_tokenizer.html";
+
+						/*	$.ajax({
+								url:'https://api.conekta.io/orders',
+								success:function(data){
+									console.log(data);
+									if (data.state) {
+										window.location.href="pedido.php";
+									}else{
+										alert(data.detail);
+									}
+								},
+								error:function(err){
+									console.error(err);
+								}
+							});
+							*/
 						}else{
-							alert(data.detail);
-						}
-					},
-					error:function(err){
-						console.error(err);
+					alert("Pago con SPEI");
 					}
-				});
-		  	} else {
-		      	console.log(Culqi.error);
-		      	alert(Culqi.error.user_message);
-		  	}
-		};
+					}
+			}
+		}
 	</script>
 	<script src="https://checkout.culqi.com/js/v3"></script>
-	<script>
-	    Culqi.publicKey = 'pk_test_3adf22bd8acf4efc';
-	</script>
+	<script type="text/javascript" src="https://pay.conekta.com/v1.0/js/conekta-checkout.min.js"></script>
+
+
 </body>
 </html>
+
