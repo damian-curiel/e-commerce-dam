@@ -46,6 +46,8 @@
 			</div>
 			<br><br>
 			<button onclick="procesar_compra()" style="margin-top: 5px;">Procesar compra</button>
+<br>
+			<button onclick="oxxo()" style="margin-top: 5px;">Prueba oxxo</button>
 		</div>
 	</div>
 	<?php include("layouts/_footer.php");
@@ -115,6 +117,7 @@
 			});
 		}
 
+
 		function procesar_compra(){
 			let dirusu="Avenida Siempre Viva 123";
 			let telusu=5512345678;
@@ -148,6 +151,10 @@
 							if (xhr.readyState === 4) {
 								console.log(xhr.status);
 								console.log(xhr.responseText);
+								var datos = JSON.parse(xhr.responseText);
+
+								
+							//	window.location.href="pedido.php";												
 							}};
 
 							var data = `{
@@ -182,22 +189,10 @@
 							}`;
 
 							xhr.send(data);
-
-							console.log("ID: " + order.id);
-							console.log("Payment Method: " + order.charges[0].payment_method.service_name);
-							console.log("Reference: " + order.charges[0].payment_method.reference);
-							console.log("$" + (order.amount/100) + order.currency);
-							console.log("Order");
-							console.log(order.line_items[0].quantity + " - "
-										+ order.line_items[0].name + " - "
-										+ (order.line_items.unit_price/100));
-											
-							}
-
-
-
-						//alert("Seleccione un método de pago2!");
-					else{						
+							window.location.href="prueba.php";
+			
+				}						//alert("Seleccione un método de pago2!");
+						else{						
 						if (tipopago==2) {
 							window.location.href="web_checkout_tokenizer.html";
 
@@ -217,6 +212,7 @@
 							});
 							*/
 						}else{
+					
 					alert("Pago con SPEI");
 					}
 					}

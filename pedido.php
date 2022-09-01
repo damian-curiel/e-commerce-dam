@@ -23,12 +23,50 @@
 			<div class="body-pedidos" id="space-list">
 			</div>
 			<h3>Datos de pago</h3>
+		
 			<div class="p-line"><div>MONTO TOTAL:</div>$&nbsp;<span id="montototal"></span></div>
-			<div class="p-line"><div>Banco:</div>STP</div>
-			<div class="p-line"><div>N° de Cuenta:</div>123456789012345678</div>
+			<div class="p-line"><div>Pagar en:</div>OXXO</div>
 			<p><b>NOTA:</b> No olvides guardar tu comprobante de transferencia exitosa.</p>
+
+	<head>
+		<link href="styles.css" media="all" rel="stylesheet" type="text/css" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+	</head>
+	<body>
+		<div class="opps">
+			<div class="opps-header">
+				<div class="opps-reminder">Ficha digital. No es necesario imprimir.</div> <br><br>
+				<div class="opps-info">
+					<div class="opps-brand"><img src="oxxopay_brand.png" alt="OXXOPay"></div>
+					<div class="opps-ammount">
+						<h3>Monto a pagar</h3>
+						<h2><div class="p-line"><div>MONTO TOTAL:</div>$&nbsp;<span id="montototal"></span></div></h2>
+						<p>OXXO cobrará una comisión adicional al momento de realizar el pago.</p>
+					</div>
+				</div>
+				<div class="opps-reference">
+					<h3>Referencia</h3>
+					<h1>0000-0000-0000-00</h1>
+				</div>
+			</div>
+			<div class="opps-instructions">
+				<h3>Instrucciones</h3>
+				<ol>
+					<li>Acude a la tienda OXXO más cercana. <a href="https://www.google.com.mx/maps/search/oxxo/" target="_blank">Encuéntrala aquí</a>.</li>
+					<li>Indica en caja que quieres realizar un pago de <strong>OXXOPay</strong>.</li>
+					<li>Dicta al cajero el número de referencia en esta ficha para que tecleé directamete en la pantalla de venta.</li>
+					<li>Realiza el pago correspondiente con dinero en efectivo.</li>
+					<li>Al confirmar tu pago, el cajero te entregará un comprobante impreso. <strong>En el podrás verificar que se haya realizado correctamente.</strong> Conserva este comprobante de pago.</li>
+				</ol>
+				<div class="opps-footnote">Al completar estos pasos recibirás un correo de <strong>Nombre del negocio</strong> confirmando tu pago.</div>
+			</div>
+		</div>	
+
 		</div>
 	</div>
+
+	</body>
+
 	<?php include("layouts/_footer.php"); ?>
 	<script type="text/javascript" src="js/main-scripts.js"></script>
 	<script type="text/javascript">
