@@ -152,6 +152,7 @@
 								console.log(xhr.status);
 								console.log(xhr.responseText);
 								var datos = JSON.parse(xhr.responseText);
+								datos.order.id
 
 								
 							//	window.location.href="pedido.php";												
@@ -189,7 +190,7 @@
 							}`;
 
 							xhr.send(data);
-							window.location.href="prueba.php";
+						//	window.location.href="pedido.php";
 			
 				}						//alert("Seleccione un método de pago2!");
 						else{						
