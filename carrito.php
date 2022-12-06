@@ -3,59 +3,66 @@
 	if (!isset($_SESSION['codusu'])) {
 		header('location: index.php');
 	}
-	require_once("conekta-php-lib\conekta-php\lib\Conekta.php");
-	\Conekta\Conekta::setApiKey("key_D8CpFzCk4x7Ho5Cr9xosgcA");
-	\Conekta\Conekta::setApiVersion("2.0.0");
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Mi sistema E-Commerce</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>DEUNA CHECKOUT 🤌🏼</title>
 	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<!-- Cross Domain Login -->
+	<script src="https://cdn.getduna.com/cdl/index.js"></script>
+    <!-- DEUNA Checkout Widget-->
+    <script src="https://cdn.getduna.com/checkout-widget/index.js"></script>
 </head>
 <body>
-	<?php include("layouts/_main-header.php"); ?>
+
+	<header>
+		<div class="logo-place"><a href="index.php"><img src="assets/logo.png"></a></div>
+		<div class="search-place">
+			<input type="text" id="idbusqueda" placeholder="Encuenta todo lo que necesitas...">
+			<button class="btn-main btn-search"><i class="fa fa-search" aria-hidden="true"></i></button>
+		</div>
+		<div class="options-place">
+			<?php
+			if (isset($_SESSION['codusu'])) {
+				echo
+				'<div class="item-option"><i class="fa fa-user-circle-o" aria-hidden="true"></i><p>'.$_SESSION['nomusu'].'</p></div>';
+			}else{
+			?>
+			<div class="item-option" title="Registrate"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+			<div class="item-option" title="Ingresar"><i class="fa fa-sign-in" aria-hidden="true"></i></div>
+			<?php
+			}
+			?>
+			<div class="item-option" title="Mis compras">
+				<a href="carrito.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+			</div>
+		</div>
+	</header>
 	<div class="main-content">
 		<div class="content-page">
-			<h2>Mi carrito de compras</h2>
+			<h3>Mi carrito</h3>
 			<div class="body-pedidos" id="space-list">
 			</div>
+			<input class="ipt-procom" type="text" id="dirusu" placeholder="Dirección">
 			<br>
-			<h3>Seleccione un método de pago</h3>
+			<input class="ipt-procom" type="text" id="telusu" placeholder="Celular">
+			<br>
+			<h4>Tipos de pago</h4>
 			<div class="metodo-pago">
 				<input type="radio" name="tipopago" value="1" id="tipo1">
-				<img src="https://assets.conekta.com/cpanel/statics/assets/brands/logos/spei-24px.svg">
-				<label for="tipo1">&nbsp &nbsp	Pago por transferencia SPEI</label>
+				<label for="tipo1">Pago por transferencia</label>
 			</div>
-			<br>
 			<div class="metodo-pago">
 				<input type="radio" name="tipopago" value="2" id="tipo2">
-				<img src="https://assets.conekta.com/cpanel/statics/assets/brands/logos/master-card-24px.svg">
-				<label for="tipo2">&nbsp &nbsp Pago con tarjeta de crédito/débito</label>
+				<label for="tipo2">Pago con tarjeta de crédito/débito</label>
 			</div>
-			<br>
-			<div class="metodo-pago">
-				<input type="radio" name="tipopago" value="3" id="tipo3">
-				<img src="https://assets.conekta.com/cpanel/statics/assets/brands/logos/oxxo-pay-24px.svg">
-				<label for="tipo3">&nbsp &nbsp Pago en efectivo con OXXO PAY</label>
-			</div>
-			<br><br>
 			<button onclick="procesar_compra()" style="margin-top: 5px;">Procesar compra</button>
-<br>
-			<button onclick="oxxo()" style="margin-top: 5px;">Prueba oxxo</button>
 		</div>
 	</div>
-	<?php include("layouts/_footer.php");
-		require_once("conekta-php-lib\conekta-php\lib\Conekta.php");
-		\Conekta\Conekta::setApiKey("key_D8CpFzCk4x7Ho5Cr9xosgcA");
-		\Conekta\Conekta::setApiVersion("2.0.0");
-	?>
-	<script type="text/javascript" src="js/main-scripts.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$.ajax({
@@ -65,7 +72,7 @@
 				success:function(data){
 					console.log(data);
 					let html='';
-				//	let sumaMonto=0;
+					let sumaMonto=0;
 					for (var i = 0; i < data.datos.length; i++) {
 						html+=
 						'<div class="item-pedido">'+
@@ -79,16 +86,16 @@
 								'<p><b>Estado:</b> '+data.datos[i].estado+'</p>'+
 								'<p><b>Dirección:</b> '+data.datos[i].dirusuped+'</p>'+
 								'<p><b>Celular:</b> '+data.datos[i].telusuped+'</p>'+
-								'<button class="btn-delete-cart" onclick="delete_product('+data.datos[i].codped+')">Eliminar</button>'+
 							'</div>'+
 						'</div>';
-						//sumaMonto+=parseInt(data.datos[i].prepro)+1;
+						sumaMonto+=parseInt(data.datos[i].prepro)+1;
 					}
-					if (data.datos.length==0) {
-						alert("No hay productos en carrito");
-						window.history.back();
-					}
-				 
+				    Culqi.settings({
+				        title: 'Mi tienda',
+				        currency: 'PEN',
+				        description: 'Productos escolares',
+				        amount: sumaMonto
+				    });
 					document.getElementById("space-list").innerHTML=html;
 				},
 				error:function(err){
@@ -96,134 +103,82 @@
 				}
 			});
 		});
-		function delete_product(codped){
-			$.ajax({
-				url:'servicios/pedido/delete_pedido.php',
-				type:'POST',
-				data:{
-					codped:codped,
-				},
-				success:function(data){
-					console.log(data);
-					if (data.state) {
-						window.location.reload();
-					}else{
-						alert(data.detail);
-					}
-				},
-				error:function(err){
-					console.error(err);
-				}
-			});
-		}
-
-
 		function procesar_compra(){
-			let dirusu="Avenida Siempre Viva 123";
-			let telusu=5512345678;
+			let dirusu=document.getElementById("dirusu").value;
+			let telusu=$("#telusu").val();
 			let tipopago=1;
 			if (document.getElementById("tipo2").checked) {
 				tipopago=2;
 			}
-			if (document.getElementById("tipo3").checked) {
-				tipopago=3;
-			}
-		//	if (dirusu=="" || telusu=="") {
-		//		alert("Complete los campos");
-		//	}else{
+			if (dirusu=="" || telusu=="") {
+				alert("Complete los campos");
+			}else{
 				if (!document.getElementById("tipo1").checked &&
-					!document.getElementById("tipo2").checked&&
-					!document.getElementById("tipo3").checked) {
+					!document.getElementById("tipo2").checked) {
 					alert("Seleccione un método de pago!");
 				}else{
-					if (tipopago==3) {
-
-							var url = "https://api.conekta.io/orders";
-
-							var xhr = new XMLHttpRequest();
-							xhr.open("POST", url);
-
-							xhr.setRequestHeader("accept", "application/vnd.conekta-v2.0.0+json");
-							xhr.setRequestHeader("content-type", "application/json");
-							xhr.setRequestHeader("Authorization", "Bearer key_7L2SkBYyugLtsRsydECwkQ");
-
-							xhr.onreadystatechange = function () {
-							if (xhr.readyState === 4) {
-								console.log(xhr.status);
-								console.log(xhr.responseText);
-								var datos = JSON.parse(xhr.responseText);
-								datos.order.id
-
-								
-							//	window.location.href="pedido.php";												
-							}};
-
-							var data = `{
-								"line_items": [{
-								"name": "Ecolapices Faber Castell",
-								"unit_price": 1199,
-								"quantity": 1
-								}],
-								"shipping_lines": [{
-								"amount": 3500,
-								"carrier": "UPS"
-								}],
-								"currency": "MXN",
-								"customer_info": {
-								"name": "Damián Curiel",
-								"email": "Damian@conekta.com",
-								"phone": "+5218181818181"
-								},
-								"shipping_contact":{
-								"address": {
-								"street1": "Calle 123, int 2",
-								"postal_code": "06100",
-								"country": "MX"
+					if (tipopago==2) {
+						Culqi.open();
+					}else{
+						$.ajax({
+							url:'servicios/pedido/confirm.php',
+							type:'POST',
+							data:{
+								dirusu:dirusu,
+								telusu:telusu,
+								tipopago:tipopago,
+								token:''
+							},
+							success:function(data){
+								console.log(data);
+								if (data.state) {
+									window.location.href="pedido.php";
+								}else{
+									alert(data.detail);
 								}
-								},
-								"charges":[{
-								"payment_method": {
-									"type": "oxxo_cash",
-									"expires_at": 1690872197
-								}
-								}]
-							}`;
-
-							xhr.send(data);
-						//	window.location.href="pedido.php";
-			
-				}						//alert("Seleccione un método de pago2!");
-						else{						
-						if (tipopago==2) {
-							window.location.href="web_checkout_tokenizer.html";
-
-						/*	$.ajax({
-								url:'https://api.conekta.io/orders',
-								success:function(data){
-									console.log(data);
-									if (data.state) {
-										window.location.href="pedido.php";
-									}else{
-										alert(data.detail);
-									}
-								},
-								error:function(err){
-									console.error(err);
-								}
-							});
-							*/
-						}else{
-					
-					alert("Pago con SPEI");
+							},
+							error:function(err){
+								console.error(err);
+							}
+						});
 					}
-					}
+				}
 			}
 		}
+		function culqi() {
+			if (Culqi.token) { 
+		      	var token = Culqi.token.id;
+		      	$.ajax({
+					url:'servicios/pedido/confirm.php',
+					type:'POST',
+					data:{
+						dirusu:document.getElementById("dirusu").value,
+						telusu:$("#telusu").val(),
+						tipopago:2,
+						token:token
+					},
+					success:function(data){
+						console.log(data);
+						if (data.state) {
+							window.location.href="pedido.php";
+						}else{
+							alert(data.detail);
+						}
+					},
+					error:function(err){
+						console.error(err);
+					}
+				});
+		  	} else {
+		      	console.log(Culqi.error);
+		      	alert(Culqi.error.user_message);
+		  	}
+		};
 	</script>
 	<script src="https://checkout.culqi.com/js/v3"></script>
-	<script type="text/javascript" src="https://pay.conekta.com/v1.0/js/conekta-checkout.min.js"></script>
-
-
+	<script>
+	    Culqi.publicKey = 'pk_test_3adf22bd8acf4efc';
+	</script>
 </body>
 </html>
 
