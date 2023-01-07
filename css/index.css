@@ -62,7 +62,7 @@ input:placeholder{
 .btn-main{
 	padding: 10px;
 	font-size: 15px;
-	background-color: #cd007b ;
+	background-color: #E37437 ;
 	border-style: none;
 	border:1px solid #ccc;
 	cursor: pointer;
@@ -81,7 +81,7 @@ input:placeholder{
 	line-height: 30px;
 	font-size: 30px;
 	cursor: pointer;
-	color:#cd007b ;
+	color:#E37437 ;
 	font-family: 'Sen', sans-serif;
 	display: flex;
 }
@@ -211,7 +211,7 @@ button{
 	font-size: 15px;
 }
 a{
-	color: #cd007b ;
+	color: #E37437 ;
 }
 .body-pedidos{
 	width: 100%;
@@ -264,7 +264,7 @@ input[type="radio"]{
 }
 .menu-opciones{
 	width: 160px;
-	background: #cd007b ;
+	background: #E37437 ;
 	position: fixed;
 	top: 70px;
     right: 50px;
@@ -290,7 +290,7 @@ input[type="radio"]{
 .caja-detalle{
 	width: 100%;
 	display: flex;
-	background: #cd007b ;
+	background: #E37437 ;
 }
 .caja-detalle .img{
 	width: 150px;
@@ -343,10 +343,10 @@ footer{
 }
 .div-flex .part h4{
 	margin: 0;
-	color: #cd007b ;
+	color: #E37437 ;
 }
 .div-flex .part p{
-	color: #cd007b ;
+	color: #E37437 ;
 }
 .mb20{
 	margin-bottom: 20px;

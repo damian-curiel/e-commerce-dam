@@ -16,9 +16,9 @@
 	<script src="https://cdn.getduna.com/cdl/index.js"></script>
     <!-- DEUNA Checkout Widget-->
     <script src="https://cdn.getduna.com/checkout-widget/index.js"></script>
+	
 </head>
 <body>
-
 	<header>
 		<div class="logo-place"><a href="index.php"><img src="assets/logo.png"></a></div>
 		<div class="search-place">
@@ -60,9 +60,30 @@
 				<input type="radio" name="tipopago" value="2" id="tipo2">
 				<label for="tipo2">Pago con tarjeta de crédito/débito</label>
 			</div>
-			<button onclick="procesar_compra()" style="margin-top: 5px;">Procesar compra</button>
+			<!--<button onclick="procesar_compra()" style="margin-top: 5px;">Procesar compra</button>--> 
+			<button id="button-checkout-deuna" onclick="shouldOpen()">
+  			<img src="https://images.getduna.com/logo-full-deuna-D.svg" alt=" DEUNA"> Checkout
+			</button>
 		</div>
 	</div>
+
+	<script>
+  function shouldOpen () {
+	const deunaCheckout = window.DunaCheckout();
+    const config = {
+		apiKey: "<your public API Key>",
+    	env: "production",
+    	orderToken: "<order token>"
+    };
+    deunaCheckout.configure(config);
+    deunaCheckout.shouldOpenCheckout().then((data) => {
+      if (data) {
+        deunaCheckout.show();
+      }
+    });
+    }
+	</script>
+
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$.ajax({
