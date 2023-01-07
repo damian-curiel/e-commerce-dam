@@ -10,13 +10,14 @@ body { font-size: 14px; }
 
 #button-checkout-deuna{
   margin: 300px auto;
+  width: 100%;
   font-family: 'Roboto', sans-serif;
   background: #283271;
   border-radius: 4px;
   color: #ffff;
-  width: 205px;
-  height: 34px;
-  font-size: 18px;
+  width: 405px;
+  height: 64px;
+  font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;

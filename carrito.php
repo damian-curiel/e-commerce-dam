@@ -6,6 +6,10 @@
 ?>
 <!DOCTYPE html>
 <html>
+
+	<!-- DEUNA Staging commerce: Admin-Shop6 --Public K: ce936cff1a2f9e61bc71d25ef936184fef35ba2251a67979025833e5c532fed20fc156650aee2fe5625c71167165e192cdb97b5906b13d52c8e4d82a197b
+											Private: 3b6b9679f3147da1f49bb0802b0267abfbcb5cd4756517dcf3d303874d7236b90ad56ad8b32917c9800632c1de3d4cc9f7edd94527ad61fa5c958a8c66ef	 -->
+
 <head>
 	<title>DEUNA CHECKOUT 🤌🏼</title>
 	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
@@ -44,9 +48,10 @@
 	</header>
 	<div class="main-content">
 		<div class="content-page">
-			<h3>Mi carrito</h3>
+			<h1>Mi carrito 🛒</h1>
 			<div class="body-pedidos" id="space-list">
 			</div>
+<!--
 			<input class="ipt-procom" type="text" id="dirusu" placeholder="Dirección">
 			<br>
 			<input class="ipt-procom" type="text" id="telusu" placeholder="Celular">
@@ -60,20 +65,162 @@
 				<input type="radio" name="tipopago" value="2" id="tipo2">
 				<label for="tipo2">Pago con tarjeta de crédito/débito</label>
 			</div>
+--> 			
 			<!--<button onclick="procesar_compra()" style="margin-top: 5px;">Procesar compra</button>--> 
+			<br><br>
 			<button id="button-checkout-deuna" onclick="shouldOpen()">
-  			<img src="https://images.getduna.com/logo-full-deuna-D.svg" alt=" DEUNA"> Checkout
+  			<img src="https://images.getduna.com/logo-full-deuna-D.svg" alt=" DEUNA"> Pagar Ahora
 			</button>
 		</div>
 	</div>
+
+			<!--++++++++++++++++++TOKENIZACIÓN DE ORDEN++++++++++++++++++++++++++--> 
+<script>
+/*
+let r = (Math.random() + 1).toString(36).substring(7);
+console.log("random", "orden"+ r);
+
+
+const data = {
+    "checkout_flow": "TOKENIZATION_PLUGINS",
+    "order": {
+        "order_id": "DEUNA_Orden_"+r,
+        "currency": "MXN",
+        "timezone": "America/Mexico_City",
+        "tax_amount": 1500,
+        "shipping_amount": 5000,
+        "items_total_amount": 100000,
+        "sub_total": 105000,
+        "total_amount": 106500,
+        "store_code": "cdmx1",
+        "webhook_urls": {
+            "notify_order": "https://webhook.site/1f21c2b3-7e52-4dba-94f0-079a0daef64b",
+            "apply_coupon": "https://{url_comercio}/api/v1/orders/{order_token}/coupons",
+            "remove_coupon": "https://{url_comercio}/api/v1/orders/{order_token}/coupons/{coupon_code}",
+            "get_shipping_methods": "",
+            "update_shipping_method": "",
+            "shipping_rate": "https://webhook.site/1f21c2b3-7e52-4dba-94f0-079a0daef64b"
+        },
+        "items": [
+            {
+                "id": "666",
+                "name": "Call of Duty modern warfare 2 PS5",
+                "description": "Juego físico",
+                "options": "opciones, sólo físico",
+                "total_amount": {
+                    "amount": total,
+                    "currency": "MXN",
+                    "currency_symbol": "$"
+                },
+                "unit_price": {
+                    "amount": 100000,
+                    "currency": "MXN",
+                    "currency_symbol": "$"
+                },
+                "tax_amount": {
+                    "amount": 1500,
+                    "currency": "MXN",
+                    "currency_symbol": "$"
+                },
+                "quantity": 1,
+                "uom": "string",
+                "upc": "string",
+                "sku": "SKU-11021",
+                "isbn": "",
+                "brand": "DEUNA GameStore",
+                "manufacturer": "DEUNA Studios",
+                "category": "Videogames",
+                "color": "",
+                "size": "",
+                "weight": {
+                    "weight": 600,
+                    "unit": "gr"
+                },
+                "image_url": "https://image.api.playstation.com/vulcan/ap/rnd/202205/2017/Ry0b7FGqNjHQvNRpRE9RjU3I.png",
+                "details_url": "https://image.api.playstation.com/vulcan/ap/rnd/202205/2017/Ry0b7FGqNjHQvNRpRE9RjU3I.png",
+                "type": "physical",
+                "taxable": false
+            }
+        ],
+        "discounts": [
+            {
+                "amount": 10000,
+                "code": "DEUNA100",
+                "reference": "DEUNA100",
+                "description": "100 pesos de descuento en compras mayores a 1,000 pesos",
+                "details_url": "https://your-ecommerce.com/discounts/#12345",
+                "free_shipping": {
+                    "is_free_shipping": true,
+                    "maximum_cost_allowed": 100000
+                },
+                "discount_category": "coupon"
+            }
+        ],
+        "shipping_address": {
+            "id": 1868,
+            "user_id": "2ae5e29e-459e-4f9c-b4d4-638885d2f4aa",
+            "first_name": "Damián",
+            "last_name": "Curiel",
+            "phone": "593999999999",
+            "identity_document": "1150218418",
+            "lat": -0.100032,
+            "lng": -78.46956,
+            "address1": "Rancho de Los Arcos 24, Coapa, Girasoles II, Coyoacán, 04920 Ciudad de México, CDMX, México",
+            "city": "cdmx",
+            "zipcode": "09880",
+            "state_name": "cdmx",
+            "country": "MEX",
+            "additional_description": "Descripción adicional",
+            "address_type": "home",
+            "is_default": true,
+            "created_at": "2021-11-03T22:09:09.086990957Z",
+            "updated_at": "2021-11-03T22:09:09.087014623Z"
+        },
+        "shipping_options": {
+            "type": "delivery",
+            "details": {
+                "store_name": "cdmx1",
+                "address": "José Luis Lagrange 103, Polanco, Polanco I Secc, Miguel Hidalgo, 11510 Ciudad de México, CDMX, México",
+                "address_coordinates": {
+                    "lat": 19.4383287,
+                    "lng": -99.2132272
+                },
+                "contact": {
+                    "name": "jhon snow",
+                    "phone": "972514910"
+                },
+                "additional_details": {
+                    "address_notes": "Piso 12"
+                }
+            }
+        },
+        "user_instructions": "This item is a gift."
+    }
+}
+
+const options = {   
+	method: 'POST',
+	headers:{
+		'content-type': 'application/json',
+		'X-API-KEY': '3b6b9679f3147da1f49bb0802b0267abfbcb5cd4756517dcf3d303874d7236b90ad56ad8b32917c9800632c1de3d4cc9f7edd94527ad61fa5c958a8c66ef',
+			},
+	body: JSON.stringify(data)
+};
+	fetch('https://api.stg.deuna.io/merchants/orders', options).then(response => response.text())
+  	.then(result => console.log(result))
+  	.catch(error => console.log('error', error));
+	*/
+
+</script>
 
 	<script>
   function shouldOpen () {
 	const deunaCheckout = window.DunaCheckout();
     const config = {
-		apiKey: "<your public API Key>",
-    	env: "production",
-    	orderToken: "<order token>"
+		apiKey: "ce936cff1a2f9e61bc71d25ef936184fef35ba2251a67979025833e5c532fed20fc156650aee2fe5625c71167165e192cdb97b5906b13d52c8e4d82a197b",
+    	env: "staging",
+    	orderToken: "ef86fbb3-f4f0-41c1-82b9-5c923f067e02"
+		//++++!!!!!!!ORDEN AQUI!!!!!!!!!+++++++++
     };
     deunaCheckout.configure(config);
     deunaCheckout.shouldOpenCheckout().then((data) => {
@@ -94,6 +241,9 @@
 					console.log(data);
 					let html='';
 					let sumaMonto=0;
+					let total=00;
+					let Nombre="";
+					let Descripcion="";
 					for (var i = 0; i < data.datos.length; i++) {
 						html+=
 						'<div class="item-pedido">'+
@@ -109,8 +259,158 @@
 								'<p><b>Celular:</b> '+data.datos[i].telusuped+'</p>'+
 							'</div>'+
 						'</div>';
-						sumaMonto+=parseInt(data.datos[i].prepro)+1;
+						sumaMonto+=Math.floor(data.datos[i].prepro);
+						total= ""+sumaMonto+0;
+						total= ""+total+0;
+						console.log("Total",total);
+						Nombre+=data.datos[i].nompro;
+						console.log("Producto: ",Nombre);
+						Descripcion+=data.datos[i].despro;
+						console.log("Desc: ",Descripcion);
 					}
+
+//++++++++++++++++++TOKENIZACIÓN DE ORDEN+++++++++++++++++++++++++
+
+let r = (Math.random() + 1).toString(36).substring(7);
+console.log("random", "orden"+ r);
+
+const tax = 1500;
+const envio = 5000;
+const descuento = 10000;
+const subtotal = +total+tax+envio;
+//console.log("subtotal ", subtotal);
+
+
+const datos = {
+    "checkout_flow": "TOKENIZATION_PLUGINS",
+    "order": {
+        "order_id": "DEUNA_Orden_"+r,
+        "currency": "MXN",
+        "timezone": "America/Mexico_City",
+        "tax_amount": tax,
+        "shipping_amount": envio,
+        "items_total_amount": total,
+        "sub_total": subtotal,
+        "total_amount": subtotal,
+        "store_code": "cdmx1",
+        "webhook_urls": {
+            "notify_order": "https://webhook.site/1f21c2b3-7e52-4dba-94f0-079a0daef64b",
+            "apply_coupon": "https://{url_comercio}/api/v1/orders/{order_token}/coupons",
+            "remove_coupon": "https://{url_comercio}/api/v1/orders/{order_token}/coupons/{coupon_code}",
+            "get_shipping_methods": "",
+            "update_shipping_method": "",
+            "shipping_rate": "https://webhook.site/1f21c2b3-7e52-4dba-94f0-079a0daef64b"
+        },
+        "items": [
+            {
+                "id": "666",
+                "name": Nombre,
+                "description": Descripcion,
+                "options": "opciones, sólo físico",
+                "total_amount": {
+                    "amount": subtotal,
+                    "currency": "MXN",
+                    "currency_symbol": "$"
+                },
+                "unit_price": {
+                    "amount": total,
+                    "currency": "MXN",
+                    "currency_symbol": "$"
+                },
+                "tax_amount": {
+                    "amount": tax,
+                    "currency": "MXN",
+                    "currency_symbol": "$"
+                },
+                "quantity": 1,
+                "uom": "string",
+                "upc": "string",
+                "sku": "SKU-11021",
+                "isbn": "",
+                "brand": "DEUNA GameStore",
+                "manufacturer": "DEUNA Studios",
+                "category": "Videogames",
+                "color": "",
+                "size": "",
+                "weight": {
+                    "weight": 600,
+                    "unit": "gr"
+                },
+                "image_url": "https://image.api.playstation.com/vulcan/ap/rnd/202205/2017/Ry0b7FGqNjHQvNRpRE9RjU3I.png",
+                "details_url": "https://image.api.playstation.com/vulcan/ap/rnd/202205/2017/Ry0b7FGqNjHQvNRpRE9RjU3I.png",
+                "type": "physical",
+                "taxable": false
+            }
+        ],
+        "discounts": [
+            {
+                "amount": descuento,
+                "code": "DEUNA100",
+                "reference": "DEUNA100",
+                "description": "100 pesos de descuento en compras mayores a 1,000 pesos",
+                "details_url": "https://your-ecommerce.com/discounts/#12345",
+                "free_shipping": {
+                    "is_free_shipping": true,
+                    "maximum_cost_allowed": descuento
+                },
+                "discount_category": "coupon"
+            }
+        ],
+        "shipping_address": {
+            "id": 1868,
+            "user_id": "2ae5e29e-459e-4f9c-b4d4-638885d2f4aa",
+            "first_name": "Damián",
+            "last_name": "Curiel",
+            "phone": "593999999999",
+            "identity_document": "1150218418",
+            "lat": -0.100032,
+            "lng": -78.46956,
+            "address1": "Rancho de Los Arcos 24, Coapa, Girasoles II, Coyoacán, 04920 Ciudad de México, CDMX, México",
+            "city": "cdmx",
+            "zipcode": "09880",
+            "state_name": "cdmx",
+            "country": "MEX",
+            "additional_description": "Descripción adicional",
+            "address_type": "home",
+            "is_default": true,
+            "created_at": "2021-11-03T22:09:09.086990957Z",
+            "updated_at": "2021-11-03T22:09:09.087014623Z"
+        },
+        "shipping_options": {
+            "type": "delivery",
+            "details": {
+                "store_name": "cdmx1",
+                "address": "José Luis Lagrange 103, Polanco, Polanco I Secc, Miguel Hidalgo, 11510 Ciudad de México, CDMX, México",
+                "address_coordinates": {
+                    "lat": 19.4383287,
+                    "lng": -99.2132272
+                },
+                "contact": {
+                    "name": "jhon snow",
+                    "phone": "972514910"
+                },
+                "additional_details": {
+                    "address_notes": "Piso 12"
+                }
+            }
+        },
+        "user_instructions": "This item is a gift."
+    }
+}
+
+const options = {   
+	method: 'POST',
+	headers:{
+		'content-type': 'application/json',
+		'X-API-KEY': '3b6b9679f3147da1f49bb0802b0267abfbcb5cd4756517dcf3d303874d7236b90ad56ad8b32917c9800632c1de3d4cc9f7edd94527ad61fa5c958a8c66ef',
+			},
+	body: JSON.stringify(datos)
+};
+	fetch('https://api.stg.deuna.io/merchants/orders', options).then(response => response.text())
+  	.then(result => console.log(result))
+  	.catch(error => console.log('error', error));
+
+
 				    Culqi.settings({
 				        title: 'Mi tienda',
 				        currency: 'PEN',
@@ -124,6 +424,7 @@
 				}
 			});
 		});
+/*
 		function procesar_compra(){
 			let dirusu=document.getElementById("dirusu").value;
 			let telusu=$("#telusu").val();
@@ -195,10 +496,11 @@
 		      	alert(Culqi.error.user_message);
 		  	}
 		};
+		*/
 	</script>
-	<script src="https://checkout.culqi.com/js/v3"></script>
+	<script src="https://checkout.culqi.com/js/v3"></script> 
 	<script>
-	    Culqi.publicKey = 'pk_test_3adf22bd8acf4efc';
+	  //  Culqi.publicKey = 'pk_test_3adf22bd8acf4efc';
 	</script>
 </body>
 </html>

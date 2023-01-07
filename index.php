@@ -24,6 +24,9 @@
 	<?php include("layouts/_footer.php"); ?>
 	<script type="text/javascript" src="js/main-scripts.js"></script>
 	<script type="text/javascript">
+
+
+
 		$(document).ready(function(){
 			$.ajax({
 				url:'servicios/producto/get_all_products.php',
@@ -57,7 +60,8 @@
 			let svalor=valor.toString();
 			let array=svalor.split(".");
 			return "$ "+array[0]+".<span>"+array[1]+"</span>";
-		}
+		};
+		
 	</script>
 </body>
 </html>

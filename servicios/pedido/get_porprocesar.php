@@ -27,6 +27,7 @@ while($row=mysqli_fetch_array($result)){
 	$obj->codped=$row['codped'];
 	$obj->codpro=$row['codpro'];
 	$obj->nompro=utf8_encode($row['nompro']);
+	$obj->despro=utf8_encode($row['despro']);
 	$obj->prepro=$row['prepro'];
 	$obj->rutimapro=$row['rutimapro'];
 	$obj->fecped=$row['fecped'];

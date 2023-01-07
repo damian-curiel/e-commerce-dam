@@ -1,0 +1,72 @@
+curl --request POST \
+     --url https://api.stg.deuna.io/merchants/transactions/purchase \
+     --header 'accept: application/json' \
+     --header 'content-type: application/json' \
+     --data '
+{
+     "token": "xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+     "email": "jhondoe@deuna.com",
+     "store_code": "all",
+     "method_type": "credit_card",
+     "processor_name": "paymentez_credit",
+     "card_id": "xxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+     "credit_card": {
+          "card_cvv": "123"
+     },
+     "user_instructions": ""
+}
+'
+
+{
+    "data": [
+      {
+        "enabled": true,
+        "method_type": "cash",
+        "processor_name": "cash",
+        "specific_fields": null,
+        "input_schema": [],
+        "labels": {
+          "es": ""
+        },
+        "exclude_cvv": false
+      },
+      {
+        "enabled": true,
+        "method_type": "credit_card",
+        "processor_name": "paymentez_credit",
+        "specific_fields": null,
+        "input_schema": [
+          {
+            "name": "card_holder",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "card_holder_dni",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "expiry_month",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "expiry_year",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "always": true,
+            "name": "card_cvv",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "labels": {
+          "es": ""
+        },
+        "exclude_cvv": false
+      }
+    ]
+  }

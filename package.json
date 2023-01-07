@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@deuna/checkout-sdk": "^1.9.0"
+  }
+}
